@@ -52,18 +52,15 @@
 
 ## Purchases テーブル
 
-| Column         | Type    | Options     |
-| -------------- | ------- | ----------- |
-| postal_code    | integer | null: false |
-| prefecture     | string  | null: false |
-| city           | string  | null: false |
-| address_line_1 | string  | null: false |
-| address_line_2 | string  |             |
-| phone_number   | integer | null: false |
-| card_number    | integer | null: false |
-| expiration     | integer | null: false |
-| security_code  | integer | null: false |
-
+| Column          | Type       | Options                        |
+| --------------- | -------    | ------------------------------ |
+| postal_code     | string     | null: false                    |
+| prefecture_id   | integer    | null: false                    |
+| city            | string     | null: false                    |
+| address_line_1  | string     | null: false                    |
+| address_line_2  | string     |                                |
+| phone_number    | string     | null: false                    |
+| manage_purchase | references | null: false, foreign_key: true |
 
 ### Association
 
