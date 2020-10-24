@@ -31,9 +31,7 @@ class ItemsController < ApplicationController
     @item = Item.find(params[:id])
     @image = @item.image
 
-    if params[:item][:image] == nil
-      params[:item][:image] = @image 
-    end
+    params[:item][:image] = @image if params[:item][:image].nil?
 
     if @item.update(item_params)
       redirect_to item_path(@item)
@@ -51,8 +49,6 @@ class ItemsController < ApplicationController
   end
 
   def identify_user
-    if current_user != Item.find(params[:id]).user
-      redirect_to root_path
-    end
+    redirect_to root_path if current_user != Item.find(params[:id]).user
   end
 end
