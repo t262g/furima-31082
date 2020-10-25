@@ -1,13 +1,12 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :edit]
-  before_action :identify_user, only: [:edit]
-
+  before_action :identify_user, only: :edit
+  before_action :find_item, only: [:show, :edit, :update]
   def index
     @items = Item.all.order('created_at DESC')
   end
 
   def show
-    @item = Item.find(params[:id])
   end
 
   def new
@@ -24,11 +23,9 @@ class ItemsController < ApplicationController
   end
 
   def edit
-    @item = Item.find(params[:id])
   end
 
   def update
-    @item = Item.find(params[:id])
     @image = @item.image
 
     params[:item][:image] = @image if params[:item][:image].nil?
@@ -50,5 +47,9 @@ class ItemsController < ApplicationController
 
   def identify_user
     redirect_to root_path if current_user != Item.find(params[:id]).user
+  end
+
+  def find_item
+    @item = Item.find(params[:id])
   end
 end
