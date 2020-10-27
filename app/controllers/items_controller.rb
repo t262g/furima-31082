@@ -3,7 +3,7 @@ class ItemsController < ApplicationController
   before_action :identify_user, only: [:edit, :destroy]
   before_action :find_item, only: [:show, :edit, :update, :destroy]
   before_action :check_purchase, only: [:edit, :destroy]
-  
+
   def index
     @items = Item.all.order('created_at DESC')
   end
@@ -61,8 +61,6 @@ class ItemsController < ApplicationController
   end
 
   def check_purchase
-    if @item.purchase != nil
-      redirect_to root_path
-    end
+    redirect_to root_path unless @item.purchase.nil?
   end
 end

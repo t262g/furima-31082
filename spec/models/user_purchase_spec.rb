@@ -11,7 +11,7 @@ RSpec.describe UserPurchase, type: :model do
         expect(@user_purchase).to be_valid
       end
       it 'address_line_2が空でも購入がうまくいく' do
-        @user_purchase.address_line_2 == nil
+        @user_purchase.address_line_2.nil?
         expect(@user_purchase).to be_valid
       end
     end
@@ -20,12 +20,12 @@ RSpec.describe UserPurchase, type: :model do
       it '郵便番号が空だとうまくいかない' do
         @user_purchase.postal_code = nil
         @user_purchase.valid?
-        expect(@user_purchase.errors.full_messages).to include "Postal code can't be blank", "Postal code is invalid. Include hyphen(-)"
+        expect(@user_purchase.errors.full_messages).to include "Postal code can't be blank", 'Postal code is invalid. Include hyphen(-)'
       end
       it '郵便番号にハイフンが入っていないとうまくいかない' do
-        @user_purchase.postal_code = "1111111"
+        @user_purchase.postal_code = '1111111'
         @user_purchase.valid?
-        expect(@user_purchase.errors.full_messages).to include "Postal code is invalid. Include hyphen(-)"
+        expect(@user_purchase.errors.full_messages).to include 'Postal code is invalid. Include hyphen(-)'
       end
       it '都道府県が空だとうまくいかない' do
         @user_purchase.area_id = nil
@@ -48,19 +48,19 @@ RSpec.describe UserPurchase, type: :model do
         expect(@user_purchase.errors.full_messages).to include "Phone number can't be blank"
       end
       it '電話番号が全角数字だとうまくいかない' do
-        @user_purchase.phone_number = "０１２３４５６７８９０"
+        @user_purchase.phone_number = '０１２３４５６７８９０'
         @user_purchase.valid?
-        expect(@user_purchase.errors.full_messages).to include "Phone number is invalid"
+        expect(@user_purchase.errors.full_messages).to include 'Phone number is invalid'
       end
       it '電話番号が12桁以上だとうまくいかない' do
-        @user_purchase.phone_number = "012345678901"
+        @user_purchase.phone_number = '012345678901'
         @user_purchase.valid?
-        expect(@user_purchase.errors.full_messages).to include "Phone number is invalid"
+        expect(@user_purchase.errors.full_messages).to include 'Phone number is invalid'
       end
       it '電話番号にハイフンが入っているとうまくいかない' do
-        @user_purchase.phone_number = "123-4567-8910"
+        @user_purchase.phone_number = '123-4567-8910'
         @user_purchase.valid?
-        expect(@user_purchase.errors.full_messages).to include "Phone number is invalid"
+        expect(@user_purchase.errors.full_messages).to include 'Phone number is invalid'
       end
       it 'priceが無いとうまくいかない' do
         @user_purchase.price = nil
@@ -73,6 +73,5 @@ RSpec.describe UserPurchase, type: :model do
         expect(@user_purchase.errors.full_messages).to include "Token can't be blank"
       end
     end
-
   end
 end
