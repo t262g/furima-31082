@@ -20,7 +20,8 @@ RSpec.describe UserPurchase, type: :model do
       it '郵便番号が空だとうまくいかない' do
         @user_purchase.postal_code = nil
         @user_purchase.valid?
-        expect(@user_purchase.errors.full_messages).to include "Postal code can't be blank", 'Postal code is invalid. Include hyphen(-)'
+        expect(@user_purchase.errors.full_messages).to include "Postal code can't be blank",
+                                                               'Postal code is invalid. Include hyphen(-)'
       end
       it '郵便番号にハイフンが入っていないとうまくいかない' do
         @user_purchase.postal_code = '1111111'
