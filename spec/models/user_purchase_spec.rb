@@ -33,6 +33,12 @@ RSpec.describe UserPurchase, type: :model do
         @user_purchase.valid?
         expect(@user_purchase.errors.full_messages).to include "Area can't be blank"
       end
+      it '都道府県に---が選択されているとうまくいかない' do
+        @user_purchase.area_id = 1
+        @user_purchase.valid?
+        binding.pry
+        expect(@user_purchase.errors.full_messages).to include "Area can't be blank"
+      end
       it '市区町村が空だとうまくいかない' do
         @user_purchase.city = nil
         @user_purchase.valid?
